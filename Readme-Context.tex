@@ -40,7 +40,7 @@ Lo zip context-win64.zip per windows l'ho scompattato in:
 
 \type{D:\scratch\latex\ConTex}.
 Nel file  context-win64.zip si trova un installer che non fa altro che scaricare tutti gli eseguibili mancanti per win64, assieme a tutti i vari font, e
-li mette nella sottodirectory tex. L'eseguibile mtxrun.exe che crea il Pdf è ora in
+li mette nella sottodirectory tex. L'eseguibile context.exe che crea il Pdf è ora in
 
 \type{D:\scratch\latex\ConTex\tex\texmf-win64\bin}
 
@@ -82,10 +82,10 @@ Poi edito il file SciTEGlobal.properties aggiungendo la linea alla fine del file
 
 Per quanto riguarda il Lexer di {\Context},  usando SciTe scaricato nel formato binario dal sito ufficiale
 non riesco a farlo andare in quanto il modulo di Lua lpeg non viene riconosciuto. Questo è dovuto al fatto che
-il binario di SciTe distribuito dal sito Scintilla non contiene Lpeg e penso che difficilemnte lo conterrà nel futuro.
+il binario di SciTe, distribuito dal sito Scintilla, non contiene Lpeg e penso che difficilmente lo conterrà nel futuro.
 
 SciTe con {\Context} risulta impostato per usare il pdf viewer https://www.sumatrapdfreader.org/downloadafter che è un exe standalone.
-L'ho messo nella stessa directory dove è {\Context}.
+L'ho messo nella stessa directory dove si trova  {\Context}.
 Così com'è, però, SciTe della distribuzione ufficiale non è utilizzabile.
 
 \subject{Compilare Scite}
@@ -95,7 +95,7 @@ https://packages.msys2.org/package/mingw-w64-ucrt-x86_64-gtk2?repo=ucrt64 \\
 Nel terminale \type{C:\msys64\msys2.exe} ho installato tutti i pacchetti per sviluppare in C/C++.
 Ho usato la categoria mingw-w64-ucrt che supporta solo  Window10/11
 (vedi https://github.com/libjxl/libjxl/blob/main/doc/developing_in_windows_msys.md per una spiegazione delle varie opzioni).
-Questi sono i comandi che ho usato per installare il compilatore:
+Questi sono i comandi che ho usato nel terminale di MySys per installare il compilatore:
 \startpowsh
 pacman -S mingw-w64-ucrt-x86_64-gcc
 pacman -S mingw-w64-ucrt-x86_64-gtk2
