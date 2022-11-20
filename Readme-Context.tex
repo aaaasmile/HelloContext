@@ -1,7 +1,17 @@
+\setuplayout[topspace=0.5in, backspace=1in, header=24pt, footer=36pt,
+  height=middle, width=middle]
+% uncomment the next line to see the layout
+%\showframe
+\setuppagenumbering[location={header,right}]
+
 \setupbodyfont[pagella]
 
 \definetyping[powsh][bodyfont=small]
 \definetyping[sh][bodyfont=small]
+
+%urls
+% nota come la tilde viene rappresentata
+\useURL[Lpeg][http://www.inf.puc-rio.br/$\sim$roberto/lpeg][][Lpeg]
 
 \starttext
 
@@ -85,12 +95,17 @@ pacman -S mingw-w64-ucrt-x86_64-gtest mingw-w64-ucrt-x86_64-giflib
 pacman -S mingw-w64-ucrt-x86_64-libpng mingw-w64-ucrt-x86_64-libjpeg-turbo
 cd /d/scratch/latex/ConTex/editor-scite/sourcecode-scite531/scintilla/gtk
 mingw32-make
-
 \stoppowsh
 Nota che uso i pacchetti ucrt che sono quelli compatibili con windows 10
 (vedi https://github.com/libjxl/libjxl/blob/main/doc/developing_in_windows_msys.md per una spiegazione delle varie opzioni )
 
 SciTe si può compilare solo nella versione win32.
+
+Siccome in Mysys2 ho diversi ambienti di compilazione installati è risultato che nella bash non avevo più nessun gcc e mingw32-make.
+Per questo ho settato nello script iniziale della bash \type{.bash_profile} questo path
+\startpowsh
+export PATH="$PATH:/c/msys64/ucrt64/bin"
+\stoppowsh
 
 \subsubject{Lpeg in SciTe}
 Da quanto ho capito Lpeg è un modulo di LUA che non è integrato in SciTe. La spiegazione si trova
@@ -98,7 +113,7 @@ in un commento nel file scite-context-lexer.lua. L'autore aveva mantenuto una dl
 per avere un Lexer di {\Context}. Ad un certo punto si è stufato di mantenere la dll con tutti i suoi cambiamenti di
 interfaccia ed ha pensato bene di integrare Lpeg in Scite direttamente. A me interessa il codice sorgente di questo nuovo SciTe,
 ma non sono riuscito a trovarlo. Ho fatto dei tentativi di integrare LPeg in Scite usando il compilatore mingw-w64 e
-scaricando lpeg da http://www.inf.puc-rio.br/~roberto/lpeg ma ancora senza risultato, in quanto non conosco bene i
+scaricando lpeg da www.inf.puc-rio.br/$\sim$roberto/lpeg  ma ancora senza risultato, in quanto non conosco bene i
 meccanismi di integrazione di Lua in SciTe.
 
 
