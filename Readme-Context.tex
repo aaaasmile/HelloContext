@@ -1,0 +1,106 @@
+\setupbodyfont[pagella]
+
+\definetyping[powsh][bodyfont=small]
+\definetyping[sh][bodyfont=small]
+
+\starttext
+
+\title{ConText}
+Vediamo di mettere un {\em Readme} usando questa volta, invece del file .md il formato .tex per avere un pdf.
+\ConTeXt\ è un altro engine per creare Pdf partendo da un sorgente in Tex. È uno degli ultimi sviluppi per quanto
+riguarda il mondo Tex e per me vale la pena di provare.
+
+\subject{Installazione}
+L'installazione non l'ho trovata immediata. C'è un Wiki che si trova su https://wiki.contextgarden.net/Installation
+dove viene indicato un link per win64. Questo link, però, non riesco a scaricarlo in quanto lo zip sembra bloccato da Brave.
+Ho allora dovuto usare in un WSL:
+\startsh
+wget http://lmtx.pragma-ade.com/install-lmtx/context-win64.zip
+\stopsh
+
+Ho anche scaricato predentemente uno zip che, da quanto ho capito, mi sembra essere il sorgente di tutto il progetto, quindi niente di
+eseguibile. Questo zip l'ho scaricato da http://www.pragma-ade.com/download-1.htm e l'ho scompattato in
+
+\type{D:\scratch\latex\ConTex}
+
+Lo zip context-win64.zip per windows è anch'esso scompattato in:
+
+\type{D:\scratch\latex\ConTex}.
+In context-win64.zip si trova un installer che non fa altro che scaricare tutti gli eseguibili mancanti per win64, assieme a tutti i vari font, e
+li mette nella sottodirectory tex. L'eseguibile è ora in
+
+\type{D:\scratch\latex\ConTex\tex\texmf-win64\bin}
+
+Ho creato la directory {\bold _my-project} dove ho messo i miei primi esperimenti con ConTex come questo file e altri esempi
+introduttivi presi dal wiki o dal file install.pdf. La prima impressione non è affatto male.
+
+\subject{Uso}
+Per farli andare si usa il comando
+\startpowsh
+context Readme-Context.tex
+\stoppowsh
+
+così viene generato il file Readme-Context.pdf.
+
+Nota bene che il comando va lanciato da cmd se si usa setpath.bat
+
+In powershell è invece:
+\startpowsh
+$env:path = "D:\scratch\latex\ConTex\tex\texmf-win64\bin;" + $env:path
+\stoppowsh
+
+\subject{Scite}
+Il programma SciTe è molto semplice da installare (non ha l'installer) e si trova su: https://www.scintilla.org/SciTEDownload.html.
+Ho installato la versione a 64 bit. Per lanciarlo in combinazione con {\Context} si usa la command line
+in \type{D:\scratch\latex\ConTex} usando il comando:
+\startpowsh
+setpath.bat
+cd .\editor-scite\wscite
+scite
+\stoppowsh
+
+Per l'installazione del lexer di  {\Context} in SciTe si va a copiare la directory
+context in \type{D:\scratch\latex\ConTex\tex\texmf-context\context\data\scite} nella directory dove risiede SciTe.
+Poi bisogna editare il file SciTEGlobal.properties aggiungendo la linea alla fine del file:
+
+\type{import context/scite-context-user}
+
+Per quanto riguarda il Lexer di {\Context}  in SciTe non riesco a farlo andare in quanto il modulo di Lua lpeg non viene
+trovato.
+
+SciTe usa come pdf viewer https://www.sumatrapdfreader.org/downloadafter che è un exe standalone.
+L'ho messo nella stessa directory dove è {\Context}. Con CTRL + F7 si ha il pdf.
+
+\subject{Compilare Scite}
+Ho usato Mysys 2 (https://www.msys2.org/) per i pacchetti vedi: https://packages.msys2.org/package/mingw-w64-ucrt-x86_64-gtk2?repo=ucrt64 \\
+Lancio il terminale \type{C:\msys64\msys2.exe} per poi installare tutti i pacchetti per sviluppare in C/C++.
+
+\startpowsh
+pacman -S mingw-w64-ucrt-x86_64-gcc
+pacman -S mingw-w64-ucrt-x86_64-gtk2
+pacman -S mingw-w64-ucrt-x86_64-make
+pacman -S --needed base-devel mingw-w64-ucrt-x86_64-toolchain
+pacman -S git mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-ninja
+pacman -S mingw-w64-ucrt-x86_64-gtest mingw-w64-ucrt-x86_64-giflib
+pacman -S mingw-w64-ucrt-x86_64-libpng mingw-w64-ucrt-x86_64-libjpeg-turbo
+cd /d/scratch/latex/ConTex/editor-scite/sourcecode-scite531/scintilla/gtk
+mingw32-make
+
+\stoppowsh
+Nota che uso i pacchetti ucrt che sono quelli compatibili con windows 10
+(vedi https://github.com/libjxl/libjxl/blob/main/doc/developing_in_windows_msys.md per una spiegazione delle varie opzioni )
+
+SciTe si può compilare solo nella versione win32.
+
+\subsubject{Lpeg in SciTe}
+Da quanto ho capito Lpeg è un modulo di LUA che non è integrato in SciTe. La spiegazione si trova
+in un commento nel file scite-context-lexer.lua. L'autore aveva mantenuto una dll, sulla falsa riga di ScintillaLua,
+per avere un Lexer di {\Context}. Ad un certo punto si è stufato di mantenere la dll con tutti i suoi cambiamenti di
+interfaccia ed ha pensato bene di integrare Lpeg in Scite direttamente. A me interessa il codice sorgente di questo nuovo SciTe,
+ma non sono riuscito a trovarlo. Ho fatto dei tentativi di integrare LPeg in Scite usando il compilatore mingw-w64 e
+scaricando lpeg da http://www.inf.puc-rio.br/~roberto/lpeg ma ancora senza risultato, in quanto non conosco bene i
+meccanismi di integrazione di Lua in SciTe.
+
+
+
+\stoptext
