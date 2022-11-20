@@ -95,12 +95,15 @@ LUA_CORE_OBJS = lapi.o lcode.o lctype.o ldebug.o ldo.o ldump.o lfunc.o lgc.o lle
 
 LUA_LIB_OBJS =	lauxlib.o lbaselib.o lbitlib.o lcorolib.o ldblib.o liolib.o lmathlib.o ltablib.o \
 		lstrlib.o loadlib.o loslib.o linit.o lutf8lib.o
+		
+LUA_LPEG_OBJS = lpcap.o lpcode.o lpprint.o lptree.o lpvm.o
 
-LUA_OBJS = LuaExtension.o $(LUA_CORE_OBJS) $(LUA_LIB_OBJS)
+LUA_OBJS = LuaExtension.o $(LUA_CORE_OBJS) $(LUA_LIB_OBJS) $(LUA_LPEG_OBJS)
 
-vpath %.c ../lua/src ../lua/src/lib
+vpath %.c ../lua/src ../lua/src/lib 
 
 INCLUDES += -I ../lua/src
+INCLUDES += -I ../lua/src/lib
 CFLAGS += -DLUA_USER_H=\"scite_lua_win.h\"
 else
 DEFINES += -DNO_LUA
