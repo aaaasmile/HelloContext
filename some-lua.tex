@@ -1,0 +1,26 @@
+\starttext
+\subject{Proviamo a veder un po' di Lua}
+
+\startluacode
+    local tmp = {
+        { a = "first 1", b = "last 1" },
+        { b = "last 2", a = "first 2" },
+    }
+    -- local tmp = table.load("somefile.lua")
+    --context.starttext()
+    --context.starttitle { title = "Some Lua" }
+    context("Just an example.") context.par()
+    context.starttabulate { "|c|c|" }
+    for i=1,#tmp do
+        local t = tmp[i]
+        context.NC()
+        context(t.a) context.NC()
+        context(t.b) context.NC()
+        context.NR()
+    end
+    context.stoptabulate()
+    --context.stoptitle()
+    --context.stoptext()
+\stopluacode
+
+\stoptext

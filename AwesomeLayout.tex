@@ -1,0 +1,70 @@
+% language=it
+\setupcolors[state=start]
+\definecolor[headingcolor][r=0.1,g=0.6, b=0.2]
+
+\setupbackgrounds
+	[text]
+	[background=color,
+	backgroundcolor=color-1]
+\setuphead[section,chapter,subject][color=headingcolor]
+\definehighlight
+[imp] %nota che questo è l'ancora per avere questa definizione di highlight. Può venire usato come \imp{testo in evidenza}
+[color=red]
+
+
+\starttext
+\subject{Questo è un titolo meraviglioso}
+Ciao
+\samplefile{tufte}
+% \samplefile{klein}
+
+\color[red]{This will show up red.} \\
+\colored[r=0.5]{also red} \\
+Se c'è un testo che è \highlight[imp]{testo molto importante} viene mostrato \imp{naturalmente} come importante.
+% \showcolorcomponents[red,green,blue,yellow,magenta,cyan,black]
+
+\definecolor[t:only] [a=1,t=.5]
+\dontleavehmode
+\blackrule[width=4cm,height=1cm,color=darkgreen]%
+\hskip-2cm
+\color[t:only]{\blackrule[width=4cm,height=1cm,color=darkred]}%
+\hskip-2cm
+\color[t:only]{\blackrule[width=4cm,height=1cm]}
+
+\startMPcode
+fill fullcircle scaled 3cm withcolor
+.5 * spotcolor("whatever",(.3,.4,.5)) ;
+fill fullcircle scaled 2cm withcolor
+spotcolor("whatever",(.3,.4,.5)) ;
+fill fullcircle scaled 1cm withcolor
+spotcolor("whatever",(.3,.4,.5)/2) ;
+\stopMPcode
+
+\blackrule[color=MyColor,width=3cm,height=1cm,depth=0cm]
+
+\definecolor[MyColor][r=.25,g=.50,b=.75]
+\bgroup
+	\definecolor[MyColor][s=.5]
+	\startMPcode
+		pickup pencircle scaled 4mm ;
+		draw fullcircle scaled 30mm withcolor \MPcolor{MyColor} ;
+		draw fullcircle scaled 15mm withcolor "MyColor" ;
+	\stopMPcode
+\egroup
+\quad
+\startMPcode
+	pickup pencircle scaled 4mm ;
+	draw fullcircle scaled 30mm withcolor \MPcolor{MyColor} ;
+	draw fullcircle scaled 15mm withcolor "MyColor" ;
+\stopMPcode
+
+
+\startplacefigure[location={top,none}]
+	[width=1cm,
+	height=1cm,
+	frame=off,
+	background=headingcolor,
+	backgroundcolor=headingcolor]
+	{Un'immagine della vita}
+\stopplacefigure
+\stoptext
