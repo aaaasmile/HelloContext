@@ -17,9 +17,16 @@
 
 \title{ConText}
 Invece di mettere un {\em Readme} in formato .md questa volta uso  il formato .tex.
-Così riesco a  creare un file Pdf, quello che stai leggendo, e testare le funzioni di questo, per me  nuovo, pacchetto Tex.
+Così riesco a creare un file Pdf (quello che stai leggendo) e testare le sue funzioni in quanto questo pacchetto Tex è  per me tutto nuovo.
 \ConTeXt\ è un altro engine per creare Pdf partendo da un sorgente in Tex. È uno degli ultimi sviluppi per quanto
 riguarda il mondo Tex e si basa su LuaTex. Il sito di riferimento è wiki.contextgarden.net.
+
+\subject{Per Partire}
+Vai nella directory \type{D:\Projects\ConTex} e lancia il comando Powershell
+\startsh
+.\prepare_context.ps1
+\stopsh
+Poi edita un file Tex come questo sorgente e lancia CTRL + F7 per vedere il pdf finale.
 
 \subject{Installazione}
 L'installazione non la trovo immediata. C'è un Wiki su https://wiki.contextgarden.net/Installation
@@ -49,6 +56,8 @@ introduttivi presi dal wiki o dal file install.pdf, così come la patch di SciTe
 che continuerò a provarlo. XeLatex (TinyTex) e sopratutto Latex (MikTex) non mi entusiasmano più di tanto.
 
 \subject{Uso}
+Di solito uso il mio SciTe-WithLpeg.exe con CTRL + F7 che parte dallo script \type{prepare_context.ps1}.
+Però si può usare anche Powershell o Cmd.exe direttamente se per caso si usa un altro editor come Visual Code.
 Per generare il file Readme-Context.pdf dal file Readme-Context.tex uso:
 \startpowsh
 context Readme-Context.tex
@@ -59,10 +68,18 @@ In powershell, invece, il path l'ho settato con il seguente comando:
 $env:path = "D:\scratch\latex\ConTex\tex\texmf-win64\bin;" + $env:path
 \stoppowsh
 
-
 \subject{Scite}
+Scite è il programma che uso per compilare i files Tex in pdf. Scite l'ho compilato dai sorgenti,
+altrimenti non posso avere il riconoscimento dei comandi di  {\Context} .
+Per avere il file pdf uso semplicemente il comando CTRL + F7.
+
+SciTe con {\Context} risulta impostato per usare il pdf viewer Sumatra (https://www.sumatrapdfreader.org/downloadafter)
+che è un exe standalone. L'impostazione si trova in un file lua che è I-pdfview.lua.
+L'ho messo nella stessa directory dove si trova  {\Context}.
+
 Per vedere come alla fine ho usato SciTe guarda la \at{pagina}[lpegscite].
 
+\subsubject{Installare SciTe Standard (non usato)}
 Il programma SciTe è molto semplice da installare (non ha l'installer) e si trova su: https://www.scintilla.org/SciTEDownload.html.
 Ho scaricato la versione a 64 bit. Ho perso l'abitudine di mettere ogni programma che uso nel Path globale di windows, mentre preferisco
 settarlo manualmente quando effettivamente lo uso.
@@ -83,14 +100,11 @@ Poi edito il file SciTEGlobal.properties aggiungendo la linea alla fine del file
 Per quanto riguarda il Lexer di {\Context},  usando SciTe scaricato nel formato binario dal sito ufficiale
 non riesco a farlo andare in quanto il modulo di Lua lpeg non viene riconosciuto. Questo è dovuto al fatto che
 il binario di SciTe, distribuito dal sito Scintilla, non contiene Lpeg e penso che difficilmente lo conterrà nel futuro.
-
-SciTe con {\Context} risulta impostato per usare il pdf viewer https://www.sumatrapdfreader.org/downloadafter che è un exe standalone.
-L'ho messo nella stessa directory dove si trova  {\Context}.
 Così com'è, però, SciTe della distribuzione ufficiale non è utilizzabile.
 
 \subject{Compilare Scite}
-Per avere un SciTe che funzioni con {\Context} ho ricompilato, sotto windows, SciTe dai sorgenti.
-Ho usato Mysys 2 (https://www.msys2.org/) e per i pacchetti vedi: \\
+Per avere in Windows  SciTe che funzioni con {\Context} l'ho dovuto ricompilare dai sorgenti.
+Ho usato Mysys 2 (https://www.msys2.org/) e per i pacchetti vedi il link \\
 https://packages.msys2.org/package/mingw-w64-ucrt-x86_64-gtk2?repo=ucrt64 \\
 Nel terminale \type{C:\msys64\msys2.exe} ho installato tutti i pacchetti per sviluppare in C/C++.
 Ho usato la categoria mingw-w64-ucrt che supporta solo  Window10/11
@@ -110,7 +124,8 @@ mingw32-make
 
 SciTe si può compilare, sotto windows, solo nella versione win32, quindi i pacchetti Gtk si possono trascurare.
 
-Siccome in Mysys2 ho diversi ambienti di compilazione installati è risultato che nella bash non ho più nessun gcc e mingw32-make.
+Siccome in Mysys2 ho diversi ambienti di compilazione installati è risultato che nella bash non
+ho più nessun gcc e mingw32-make.
 Per questo ho settato nello script iniziale della bash, il file  \type{.bash_profile}, questo path:
 \startpowsh
 export PATH="$PATH:/c/msys64/ucrt64/bin"
